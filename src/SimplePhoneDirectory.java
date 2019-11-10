@@ -35,7 +35,7 @@ public class SimplePhoneDirectory extends Application{
 		GridPane mainPane = new GridPane();		
 		GridPane top = new GridPane();
 		GridPane middle = new GridPane();
-		GridPane bottom = new GridPane(); // Not used yet, maybe will be in the future
+		GridPane bottom = new GridPane(); 
 		
 		// Create and Add Title
 		Text title = new Text(" Directory ");
