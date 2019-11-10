@@ -70,7 +70,7 @@ public class SimplePhoneDirectory extends Application{
 		TextArea information = new TextArea();
 		information.setPadding(new Insets(2, 5, 2, 5));
 		bottom.add(information, 0, 0);
-		mainPane.add(information, 0, 3);
+		mainPane.add(bottom, 0, 3);
 		
 		// Display the scene.
 		Scene newScene = new Scene(mainPane);	
