@@ -2,7 +2,7 @@
 
 Imports numbers from numbers.txt and sorts them.
 
-Users can manually add numbers efficiently using a form in the GUI application.
+Users can manually add and search numbers efficiently using a form in the GUI application.
 
 
 | Includes           |        |
