@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.Reflection;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -48,6 +49,7 @@ public class SimplePhoneDirectory extends Application{
 		mainPane.setVgap(15.0);
 		mainPane.add(top,0,0);
 		
+		
 		// Create and Add New Phone Interface
 		Text name = new Text(" Name: ");
 		name.setFont(Font.font ("Verdana", FontWeight.BOLD, 18));
@@ -63,9 +65,14 @@ public class SimplePhoneDirectory extends Application{
 		middle.add(nameField, 1, 0);
 		middle.add(numberField, 1, 1);
 		middle.add(submit, 1, 2);
+		
+		TextField searchField = new TextField ();
+		Button submitSearch = new Button("Search");		
+		middle.add(searchField, 0, 3);
+		middle.add(submitSearch, 1, 3);
+		
 		mainPane.add(middle,0,1);
 		mainPane.add(formatSuggestion, 0, 2);
-				
 		// Create and Add Display Interface
 		TextArea information = new TextArea();
 		information.setPadding(new Insets(2, 5, 2, 5));
@@ -78,7 +85,7 @@ public class SimplePhoneDirectory extends Application{
 		primaryStage.setWidth(460);
 		primaryStage.setHeight(540);
 		primaryStage.setResizable(false);
-		primaryStage.setTitle("Simple Phone Directory version 1.2 -  by Vision Paudel");
+		primaryStage.setTitle("Simple Phone Directory version 1.8 -  by Vision Paudel");
 		primaryStage.show();
 		getPhoneNumbers(information);
 		
@@ -102,13 +109,36 @@ public class SimplePhoneDirectory extends Application{
 				
 			} catch (FileNotFoundException e1) {
 				e1.printStackTrace();
-			} catch (Exception e1) {
-				e1.printStackTrace();
+			} catch (Exception e2) {
+				e2.printStackTrace();
 			}
 		    			
 		});
-				
 		
+		
+		submitSearch.setOnMouseClicked( e -> {   
+			TextArea searchInformation = new TextArea();
+			searchInformation.setPadding(new Insets(2, 5, 2, 5));
+			
+			for(int i = 0; i < listOfPeopleNumbers.size(); i++) {
+				String current = listOfPeopleNumbers.get(i).toString();
+				String searchText = searchField.getText();
+				if ( current.contains(searchText) ) {
+					searchInformation.setText(searchInformation.getText() + listOfPeopleNumbers.get(i).toString() +"\n" );
+				}
+			}
+			BorderPane searchPane = new BorderPane();
+			searchPane.setCenter(searchInformation);
+			Scene searchScene = new Scene(searchPane);
+			Stage searchStage = new Stage();
+			searchStage.setScene(searchScene);
+			searchStage.setWidth(300);
+			searchStage.setHeight(310);
+			searchStage.setResizable(true);
+			searchStage.setTitle("Search Result!");
+			searchStage.show();					
+		});
+				
 	}
 	
 	// Get phone numbers from file and process.
