@@ -11,4 +11,4 @@ Users can manually add numbers efficiently using a form in the GUI application.
 | Binary File(s)     |&#9745; |
 | Runnable Jar File  |        |
 
-<a href="https://github.com/Vision-Paudel/SimplePhoneDirectory/blob/master/GUI.png><img src="https://github.com/Vision-Paudel/SimplePhoneDirectory/blob/master/GUI.png" alt="Image could not be displayed"></a>
+<img src="https://github.com/Vision-Paudel/SimplePhoneDirectory/blob/master/GUI.png" alt="Image could not be displayed">
