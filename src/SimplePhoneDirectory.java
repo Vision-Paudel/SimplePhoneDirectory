@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.Scanner;
 
 import javafx.application.Application;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -32,7 +33,7 @@ public class SimplePhoneDirectory extends Application{
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		
-		
+		// Initialize GridPane layouts
 		GridPane mainPane = new GridPane();		
 		GridPane top = new GridPane();
 		GridPane middle = new GridPane();
@@ -60,6 +61,7 @@ public class SimplePhoneDirectory extends Application{
 		TextField nameField = new TextField ();
 		TextField numberField = new TextField ();
 		Button submit = new Button("Submit");
+		GridPane.setHalignment(submit, HPos.RIGHT);
 		middle.add(name, 0, 0);
 		middle.add(number, 0, 1);		
 		middle.add(nameField, 1, 0);
@@ -67,12 +69,15 @@ public class SimplePhoneDirectory extends Application{
 		middle.add(submit, 1, 2);
 		
 		TextField searchField = new TextField ();
-		Button submitSearch = new Button("Search");		
+		Button submitSearch = new Button("Search");
+		middle.setHgap(5);
+		middle.setVgap(5);		
 		middle.add(searchField, 0, 3);
 		middle.add(submitSearch, 1, 3);
 		
 		mainPane.add(middle,0,1);
 		mainPane.add(formatSuggestion, 0, 2);
+		
 		// Create and Add Display Interface
 		TextArea information = new TextArea();
 		information.setPadding(new Insets(2, 5, 2, 5));
@@ -85,9 +90,9 @@ public class SimplePhoneDirectory extends Application{
 		primaryStage.setWidth(460);
 		primaryStage.setHeight(540);
 		primaryStage.setResizable(false);
-		primaryStage.setTitle("Simple Phone Directory version 1.8 -  by Vision Paudel");
+		primaryStage.setTitle("Simple Phone Directory version 2.0 -  by Vision Paudel");
 		primaryStage.show();
-		getPhoneNumbers(information);
+		getPhoneNumbers(information); // Initially collect numbers from numbers.txt
 		
 		// Event handler for submit button
 		submit.setOnMouseClicked(   e -> {
@@ -108,14 +113,15 @@ public class SimplePhoneDirectory extends Application{
 				getPhoneNumbers(information);
 				
 			} catch (FileNotFoundException e1) {
-				e1.printStackTrace();
-			} catch (Exception e2) {
+				System.out.println("File Not Found!");
+			}
+			  catch (Exception e2) {
 				e2.printStackTrace();
 			}
-		    			
+			
 		});
 		
-		
+		// Event handler for submitSearch button
 		submitSearch.setOnMouseClicked( e -> {   
 			TextArea searchInformation = new TextArea();
 			searchInformation.setPadding(new Insets(2, 5, 2, 5));
@@ -142,12 +148,13 @@ public class SimplePhoneDirectory extends Application{
 	}
 	
 	// Get phone numbers from file and process.
-	void getPhoneNumbers(TextArea information) throws Exception {
+	void getPhoneNumbers(TextArea information) throws FileNotFoundException {
+		
 		
 		File file = new File("numbers.txt");
 		
 		if(!file.exists()){
-			throw new Exception("File not found: numbers.txt");	
+			System.out.println("File not found: numbers.txt");	
 		}
 		else {
 			
