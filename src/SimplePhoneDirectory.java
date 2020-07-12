@@ -27,7 +27,7 @@ public class SimplePhoneDirectory extends Application{
 	ArrayList<String> listOfPeopleNumbers = new ArrayList<String>();
 		
 	public static void main(String[] args) throws Exception {
-		launch(args);		
+		launch(args);		// Launch Application with arguments
 	}
 	
 	@Override
@@ -39,7 +39,7 @@ public class SimplePhoneDirectory extends Application{
 		GridPane middle = new GridPane();
 		GridPane bottom = new GridPane(); 
 		
-		// Create and Add Title
+		// Create and add title
 		Text title = new Text(" Directory ");
 		title.setFont(Font.font ("Verdana", FontWeight.BOLD, 24));
 		title.setFill(Color.GREEN);
@@ -51,7 +51,7 @@ public class SimplePhoneDirectory extends Application{
 		mainPane.add(top,0,0);
 		
 		
-		// Create and Add New Phone Interface
+		// Create and add new phone interface
 		Text name = new Text(" Name: ");
 		name.setFont(Font.font ("Verdana", FontWeight.BOLD, 18));
 		Text number = new Text(" Number: ");
@@ -78,8 +78,9 @@ public class SimplePhoneDirectory extends Application{
 		mainPane.add(middle,0,1);
 		mainPane.add(formatSuggestion, 0, 2);
 		
-		// Create and Add Display Interface
+		// Create and add 'phone number display interface'
 		TextArea information = new TextArea();
+		information.setEditable(false);
 		information.setPadding(new Insets(2, 5, 2, 5));
 		bottom.add(information, 0, 0);
 		mainPane.add(bottom, 0, 3);
@@ -90,7 +91,7 @@ public class SimplePhoneDirectory extends Application{
 		primaryStage.setWidth(460);
 		primaryStage.setHeight(540);
 		primaryStage.setResizable(false);
-		primaryStage.setTitle("Simple Phone Directory version 2.0 -  by Vision Paudel");
+		primaryStage.setTitle("Simple Phone Directory version 2.1 -  by Vision Paudel");
 		primaryStage.show();
 		getPhoneNumbers(information); // Initially collect numbers from numbers.txt
 		
