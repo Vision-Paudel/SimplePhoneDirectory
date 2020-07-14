@@ -3,13 +3,20 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ColorPicker;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.Reflection;
@@ -17,6 +24,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -38,6 +46,7 @@ public class SimplePhoneDirectory extends Application{
 		GridPane top = new GridPane();
 		GridPane middle = new GridPane();
 		GridPane bottom = new GridPane(); 
+		GridPane format = new GridPane();
 		
 		// Create and add title
 		Text title = new Text(" Directory ");
@@ -49,8 +58,7 @@ public class SimplePhoneDirectory extends Application{
 		top.add(title, 0, 0);
 		mainPane.setVgap(15.0);
 		mainPane.add(top,0,0);
-		
-		
+				
 		// Create and add new phone interface
 		Text name = new Text(" Name: ");
 		name.setFont(Font.font ("Verdana", FontWeight.BOLD, 18));
@@ -74,24 +82,89 @@ public class SimplePhoneDirectory extends Application{
 		middle.setVgap(5);		
 		middle.add(searchField, 0, 3);
 		middle.add(submitSearch, 1, 3);
-		
 		mainPane.add(middle,0,1);
-		mainPane.add(formatSuggestion, 0, 2);
 		
 		// Create and add 'phone number display interface'
 		TextArea information = new TextArea();
 		information.setEditable(false);
 		information.setPadding(new Insets(2, 5, 2, 5));
+		information.setMaxWidth(500);
+		information.setFont( Font.font("Times New Roman", FontWeight.NORMAL, FontPosture.REGULAR, 12.0));
 		bottom.add(information, 0, 0);
-		mainPane.add(bottom, 0, 3);
+		mainPane.add(bottom, 0, 4);				
+		mainPane.add(formatSuggestion, 0, 2);	
 		
+		// Create font format area
+		ComboBox<String> cbFonts = new ComboBox<String>();
+		ObservableList<String> fontItemsList = FXCollections.observableArrayList( Font.getFamilies() );
+		cbFonts.getItems().addAll(fontItemsList);		
+		cbFonts.setValue("Times New Roman");
+	
+		ComboBox<Double> cbFontsSize = new ComboBox<Double>();
+		List<Double> fontsSizes = new ArrayList<Double>();
+		fontsSizes.add(8.0);	fontsSizes.add(12.0);	fontsSizes.add(16.0);	fontsSizes.add(20.0);	fontsSizes.add(24.0);	fontsSizes.add(28.0);	fontsSizes.add(32.0);	fontsSizes.add(36.0); 	
+		ObservableList<Double> fontsSizeItemsList = FXCollections.observableArrayList( fontsSizes );
+		cbFontsSize.getItems().addAll(fontsSizeItemsList);		
+		cbFontsSize.setValue(12.0);
+							
+		Label lblBold = new Label("B");
+		lblBold.setFont( Font.font("Times New Roman", FontWeight.BOLD, FontPosture.REGULAR, 12.0) );
+		CheckBox bold = new CheckBox();
+		Label lblItallic = new Label("I");
+		lblItallic.setFont(Font.font("Times New Roman", FontWeight.NORMAL, FontPosture.ITALIC, 12.0));
+		CheckBox itallic = new CheckBox();
+		
+		final ColorPicker colorPicker = new ColorPicker();
+        colorPicker.setValue(Color.BLACK);
+		
+		format.add(cbFonts, 0, 0);	
+		format.add(cbFontsSize, 1, 0);
+		format.add(lblBold, 2, 0);
+		format.add(bold, 3, 0);
+		format.add(lblItallic, 4, 0);
+		format.add(itallic, 5, 0);
+		format.add(colorPicker, 6, 0);
+		format.setHgap(2);
+		mainPane.add(format, 0, 3);
+		
+		
+		cbFonts.setOnAction(  e -> {			
+			javafx.scene.text.FontWeight isBold = (bold.isSelected()? FontWeight.BOLD : FontWeight.NORMAL);
+			javafx.scene.text.FontPosture isItallic = (itallic.isSelected()? FontPosture.ITALIC : FontPosture.REGULAR);	
+			information.setFont( Font.font(cbFonts.getValue(), isBold, isItallic, cbFontsSize.getValue()));
+		});
+		
+		cbFontsSize.setOnAction(  e -> {
+			javafx.scene.text.FontWeight isBold = (bold.isSelected()? FontWeight.BOLD : FontWeight.NORMAL);
+			javafx.scene.text.FontPosture isItallic = (itallic.isSelected()? FontPosture.ITALIC : FontPosture.REGULAR);	
+			information.setFont( Font.font(cbFonts.getValue(), isBold, isItallic, cbFontsSize.getValue()));
+		});
+		
+		bold.setOnAction(  e -> {
+			javafx.scene.text.FontWeight isBold = (bold.isSelected()? FontWeight.BOLD : FontWeight.NORMAL);
+			javafx.scene.text.FontPosture isItallic = (itallic.isSelected()? FontPosture.ITALIC : FontPosture.REGULAR);	
+			information.setFont( Font.font(cbFonts.getValue(), isBold, isItallic, cbFontsSize.getValue()));
+		});
+		
+		itallic.setOnAction(  e -> {
+			javafx.scene.text.FontWeight isBold = (bold.isSelected()? FontWeight.BOLD : FontWeight.NORMAL);
+			javafx.scene.text.FontPosture isItallic = (itallic.isSelected()? FontPosture.ITALIC : FontPosture.REGULAR);	
+			information.setFont( Font.font(cbFonts.getValue(), isBold, isItallic, cbFontsSize.getValue()));
+		});
+		
+		colorPicker.setOnAction( e -> {
+			  String value = ""+colorPicker.getValue();
+			  value = value.substring(value.length()-8);
+              information.setStyle("-fx-text-fill:#"+value+";");               
+        });
+					
 		// Display the scene.
 		Scene newScene = new Scene(mainPane);	
 		primaryStage.setScene(newScene);
-		primaryStage.setWidth(460);
+		primaryStage.setWidth(500);
 		primaryStage.setHeight(540);
 		primaryStage.setResizable(false);
-		primaryStage.setTitle("Simple Phone Directory version 2.1 -  by Vision Paudel");
+		primaryStage.setTitle("Simple Phone Directory version 3.0 -  by Vision Paudel");
 		primaryStage.show();
 		getPhoneNumbers(information); // Initially collect numbers from numbers.txt
 		
@@ -134,6 +207,12 @@ public class SimplePhoneDirectory extends Application{
 					searchInformation.setText(searchInformation.getText() + listOfPeopleNumbers.get(i).toString() +"\n" );
 				}
 			}
+			javafx.scene.text.FontWeight isBold = (bold.isSelected()? FontWeight.BOLD : FontWeight.NORMAL);
+			javafx.scene.text.FontPosture isItallic = (itallic.isSelected()? FontPosture.ITALIC : FontPosture.REGULAR);	
+			searchInformation.setFont( Font.font(cbFonts.getValue(), isBold, isItallic, cbFontsSize.getValue()));
+			String value = ""+colorPicker.getValue();
+			value = value.substring(value.length()-8);
+			searchInformation.setStyle("-fx-text-fill:#"+value+";"); 
 			BorderPane searchPane = new BorderPane();
 			searchPane.setCenter(searchInformation);
 			Scene searchScene = new Scene(searchPane);
@@ -145,6 +224,7 @@ public class SimplePhoneDirectory extends Application{
 			searchStage.setTitle("Search Result!");
 			searchStage.show();					
 		});
+				
 				
 	}
 	
@@ -165,6 +245,7 @@ public class SimplePhoneDirectory extends Application{
 				listOfPeopleNumbers.add(input.nextLine());
 				i++;   
 			}
+			System.out.println("Total lines read: " + i);
 			Collections.sort(listOfPeopleNumbers);
 			
 			for(int count = 0; count < listOfPeopleNumbers.size(); count++) {				
