@@ -20,5 +20,5 @@ java -jar SimplePhoneDirectory.jar
 Requires numbers.txt in the same folder.
 
 ---
-<img src="https://github.com/Vision-Paudel/SimplePhoneDirectory/blob/master/GUI.png" alt="Image could not be displayed">
-<img src="https://github.com/Vision-Paudel/SimplePhoneDirectory/blob/master/GUI%202.png" alt="Image could not be displayed">
+<img src="https://github.com/Vision-Paudel/SimplePhoneDirectory/blob/master/GUI%20A1.png" alt="Image could not be displayed">
+<img src="https://github.com/Vision-Paudel/SimplePhoneDirectory/blob/master/GUI%20A2.png" alt="Image could not be displayed">
