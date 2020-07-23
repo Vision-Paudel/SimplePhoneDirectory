@@ -2,7 +2,7 @@
 
 Imports numbers from numbers.txt and sorts them.
 
-Users can manually add and search well-formatted numbers efficiently using a form in the GUI application.
+Users can manually add and search well-formatted phone numbers (can also be serial numbers, ISBN #, product keys, password etc. any alphanumeric string that can be searched) efficiently using a form in the GUI application.
 
 
 | Includes           |        |
