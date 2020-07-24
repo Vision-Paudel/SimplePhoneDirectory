@@ -21,5 +21,5 @@ Requires numbers.txt in the same folder.
 Creates SimplePhoneDirectoryPreferences.txt to save text formatting.
 
 ---
-<img src="https://github.com/Vision-Paudel/SimplePhoneDirectory/blob/master/GUI%20A1.png" alt="Image could not be displayed">
+<img src="https://github.com/Vision-Paudel/SimplePhoneDirectory/blob/master/GUI%201.png" alt="Image could not be displayed">
 <img src="https://github.com/Vision-Paudel/SimplePhoneDirectory/blob/master/GUI%20A2.png" alt="Image could not be displayed">
